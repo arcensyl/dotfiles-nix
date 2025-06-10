@@ -39,9 +39,9 @@ in {
 	nixpkgs.config.allowUnfree = true;
 
 	# Enables several experimental features for Nix. Here's a list:
-	#   1. nix-command - Enables several subcommands under 'nix'
+	#   1. nix-command - Enables several subcommands under 'nix'.
 	#   2. flakes - Enables flakes, which are special Nix files that can access other flakes.
-	#   3. pipe-operators - Enables pipe operators ( |> or <| ) in Nix code
+	#   3. pipe-operators - Enables pipe operators ( |> or <| ) in Nix code.
 	nix.settings.experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
 
 	# Adds a variety of helpers and utilities for use with Nix.
@@ -93,6 +93,10 @@ in {
 	  # Second, we need to tell Home Manager about this user.
 	  home.username = vars.master.name;
 	  home.homeDirectory = vars.master.homeDir;
+
+      # Third, we include any packages helpful with general system management.
+      # We only include Just for this currently.
+      home.packages = [ pkgs.just ];
 
 	  # Finally, we enable this to help when changing fonts.
       fonts.fontconfig.enable = true;
