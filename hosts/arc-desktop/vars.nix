@@ -1,4 +1,4 @@
-{ inputs myHost }:
+{ inputs, myHost }:
 
 let
   sysType = "x86_64-linux";
@@ -16,11 +16,11 @@ in rec {
 
     homeDir = "/home/${master.name}";
     dotDir = "${master.homeDir}/.dotfiles";
-    flakeDir = "${master.dotDir}/nix";
+    flakeDir = "path:${master.dotDir}/nix";
   };
 
   theme = {
-    wallpaper = "${flakeDir}/gen/current_wallpaper";
+    wallpaper = "${master.dotDir}/nix/current_wallpaper";
 
     polarity = "dark";
     colorScheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
