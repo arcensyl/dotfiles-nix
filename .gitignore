@@ -1,3 +1,4 @@
 gen/
 flake.lock.old
-hosts/*/hardware-configuration.nix
+hosts/*
+hosts/default/
