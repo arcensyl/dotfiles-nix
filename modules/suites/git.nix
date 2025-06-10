@@ -36,5 +36,7 @@ in {
 		init.defaultBranch = cfg.defaultBranch;
 	  };
     };
+
+    programs.gh.enable = true;
   };
 }
