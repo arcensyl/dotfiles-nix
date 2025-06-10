@@ -37,7 +37,8 @@
   outputs = { self, nixpkgs, ... }@inputs:
     
   let
-    myHost = import ./gen/my_hostname.nix;
+    myHostOpt = builtins.getEnv "MY_HOSTNAME";
+    myHost = if myHostOpt != "" then myHostOpt else "default";
     vars = import "./${myHost}/vars.nix" { inherit inputs myHost; };
     pkgs = import nixpkgs { system = vars.system.type; };
   in {
