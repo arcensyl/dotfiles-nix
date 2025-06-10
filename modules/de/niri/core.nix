@@ -26,7 +26,7 @@ in {
       };
 
       programs.niri.settings.spawn-at-startup = [
-        { command = [ "swaybg" "-i" "~/.dotfiles/nix/current_wallpaper" ]; }
+        { command = [ "swaybg" "-i" "~/.dotfiles/nix/gen/current_wallpaper" ]; }
       ];
 
     };

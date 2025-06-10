@@ -1,6 +1,7 @@
 alias rb := rebuild
 alias up := update
 alias gc := clean
+alias chw := change-wallpaper
 
 # List all available recipes.
 @default:
@@ -30,3 +31,14 @@ alias gc := clean
     nh clean all --keep 5
     
     @# System cleaned!
+
+# Change this system's wallpaper to PATH.
+[no-cd]
+@change-wallpaper path:
+    @# Linking wallpaper...
+    ln -sf "{{absolute_path(canonicalize(path))}}" ~/.dotfiles/nix/gen/current_wallpaper
+    
+    @# Reloading wallpaper...
+    hyprctl hyprpaper reload ,~/.dotfiles/nix/gen/current_wallpaper
+    
+    @# Wallpaper changed!

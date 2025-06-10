@@ -23,13 +23,21 @@ in {
     };
 
     home-manager.users."${vars.master.name}" = {
-      wayland.windowManager.hyprland.enable = true;
+      home.packages = [ pkgs.hyprpaper ];
 
-      wayland.windowManager.hyprland.settings = {
-        monitor = cfg.monitors;
+      wayland.windowManager.hyprland = {
+        enable = true;
+        settings.monitor = cfg.monitors;
+        settings.exec-once = [ "hyprpaper" ];
       };
 
-      services.hyprpaper.enable = true;
+      home.file.hyprpaper = {
+        target = ".config/hypr/hyprpaper.conf";
+        text = ''
+          preload = ${vars.master.dotDir}/nix/gen/current_wallpaper
+          wallpaper =, ${vars.master.dotDir}/nix/gen/current_wallpaper
+        '';
+      };
     };
   };
 }
