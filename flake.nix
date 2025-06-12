@@ -51,11 +51,17 @@
       in lib.nixosSystem {
         specialArgs = { inherit inputs props vars; };
         modules = [
+          # Full modules:
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.niri.nixosModules.niri
-          { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
           ./modules
+
+          # Inline modules:
+          { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+
+          # Host-specific files:
+          (./hosts + "/${host}/hardware-configuration.nix")
           (./hosts + "/${host}/configuration.nix")
         ];
       };

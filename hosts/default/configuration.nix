@@ -1,10 +1,6 @@
 { config, pkgs, inputs, vars, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix # Required by system.
-  ];
-
   # My 'core' module provides everything a minimal system needs.
   # Disabling this will likely break your system.
   core = {
