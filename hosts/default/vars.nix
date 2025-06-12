@@ -1,14 +1,8 @@
-{ inputs, host }:
+{ inputs, props }:
 
 let
-  sysType = "x86_64-linux";
-  pkgs = inputs.nixpkgs.legacyPackages.${sysType};
+  pkgs = inputs.nixpkgs.legacyPackages.${props.system.platform};
 in rec {
-  system = {
-    name = host;
-    type = sysType;
-  };
-  
   master = {
     name = "master";
     fullName = "Master";

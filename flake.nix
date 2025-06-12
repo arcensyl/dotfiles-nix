@@ -46,10 +46,10 @@
     # This function takes a host name, and then returns its associated configuration.
     mkHostConfig = host: 
       let
-        vars = import (./hosts + "/${host}/vars.nix") { inherit inputs host; };
+        props = import (./hosts + "/${host}/system-properties.nix") { inherit host; };
+        vars = import (./hosts + "/${host}/vars.nix") { inherit inputs props; };
       in lib.nixosSystem {
-        system = vars.system.type;
-        specialArgs = { inherit inputs vars; };
+        specialArgs = { inherit inputs props vars; };
         modules = [
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix

@@ -1,4 +1,4 @@
-{ lib, config, pkgs, vars, ... }:
+{ lib, config, pkgs, props, vars, ... }:
 
 let
   cfg = config.core;
@@ -26,7 +26,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-	networking.hostName = vars.system.name;
+    # We need to use our host's name and version.
+	networking.hostName = props.system.name;
+    system.stateVersion = props.system.version;
 
 	# The boot loader is configured here.
 	boot.loader.systemd-boot.enable = true;
@@ -90,11 +92,14 @@ in {
 	  # First, we need to tell Home Manager to manage itself.
 	  programs.home-manager.enable = true;
 
-	  # Second, we need to tell Home Manager about this user.
+      # Second, we need to tell Home Manager the initial version of NixOS this system installed.
+      home.stateVersion = props.system.version;
+      
+	  # Third, we need to tell Home Manager about this user.
 	  home.username = vars.master.name;
 	  home.homeDirectory = vars.master.homeDir;
 
-      # Third, we include any packages helpful with general system management.
+      # Fourth, we include any packages helpful with general system management.
       # We only include Just for this currently.
       home.packages = [ pkgs.just ];
 

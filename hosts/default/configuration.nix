@@ -1,13 +1,6 @@
 { config, pkgs, inputs, vars, ... }:
 
 {
-  # These indicate the version of NixOS that my default settings are based on.
-  # Be very careful when changing these, and make sure to consult any documentation first.
-  system.stateVersion = "24.05";
-  home-manager.users."${vars.master.name}".home = {
-	stateVersion = "24.05";
-  };
-
   imports = [
     ./hardware-configuration.nix # Required by system.
   ];
