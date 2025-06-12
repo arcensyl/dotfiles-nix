@@ -11,5 +11,6 @@
     ./gaming.nix
     ./vr.nix
 	./ai.nix
+    ./containerization.nix
   ];
 }
