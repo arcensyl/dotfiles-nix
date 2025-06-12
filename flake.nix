@@ -35,29 +35,31 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
-    
   let
-    myHostOpt = builtins.getEnv "MY_HOSTNAME";
-    myHost = if myHostOpt != "" then myHostOpt else "default";
-    vars = import ./hosts/${myHost}/vars.nix { inherit inputs myHost; };
-    pkgs = import nixpkgs { system = vars.system.type; };
-  in {
-    nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-    
-    nixosConfigurations."${myHost}" = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs vars; };
-      modules = [
-        inputs.home-manager.nixosModules.home-manager
-        inputs.stylix.nixosModules.stylix
-        inputs.niri.nixosModules.niri
-        { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
-        ./modules
-        ./hosts/${myHost}/configuration.nix
-      ];  
-    };
+    inherit (nixpkgs) lib;
 
-    # FIXME: Correct or remove this line.
-    # This was originally meant to help get HM-related completions in the Nix LSP.
-    homeOptions = inputs.home-manager.nixosModules.home-manager.options;
+    # Hosts are automatically discovered by walking through the 'hosts' directory.
+    hosts = builtins.attrNames (lib.filterAttrs 
+      (name: type: type == "directory") 
+      (builtins.readDir ./hosts));
+
+    # This function takes a host name, and then returns its associated configuration.
+    mkHostConfig = host: 
+      let
+        vars = import (./hosts + "/${host}/vars.nix") { inherit inputs host; };
+      in lib.nixosSystem {
+        system = vars.system.type;
+        specialArgs = { inherit inputs vars; };
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
+          inputs.niri.nixosModules.niri
+          { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+          ./modules
+          (./hosts + "/${host}/configuration.nix")
+        ];
+      };
+  in {
+    nixosConfigurations = lib.genAttrs hosts mkHostConfig;
   };
 }

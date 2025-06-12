@@ -10,7 +10,7 @@ alias chw := change-wallpaper
 # Build this configuration, and then switch this machine to the new generation.
 @rebuild:
     @# Rebuilding system...
-    nh os switch -- --impure
+    nh os switch
     
     @# Rebuild complete!
 

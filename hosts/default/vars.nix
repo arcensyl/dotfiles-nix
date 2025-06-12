@@ -1,11 +1,11 @@
-{ inputs, myHost }:
+{ inputs, host }:
 
 let
   sysType = "x86_64-linux";
   pkgs = inputs.nixpkgs.legacyPackages.${sysType};
 in rec {
   system = {
-    name = myHost;
+    name = host;
     type = sysType;
   };
   

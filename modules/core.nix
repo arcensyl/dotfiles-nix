@@ -28,9 +28,6 @@ in {
   config = lib.mkIf cfg.enable {
 	networking.hostName = vars.system.name;
 
-    # This variable is needed for future builds of my configuration.
-    environment.sessionVariables.MY_HOSTNAME = vars.system.name;
-    
 	# The boot loader is configured here.
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
