@@ -7,7 +7,7 @@ in {
     lib.mkEnableOption "Discord, or one of its alternate clients";
 
   config.home-manager.users."${vars.master.name}" = lib.mkIf cfg.enable {
-    home.packages = [ pkgs.vesktop ];
+    programs.vesktop.enable = true;
 
     wayland.windowManager.hyprland.settings.bind = lib.mkIf config.de.hypr.enable [
       "CTRL ALT, C, exec, vesktop"
