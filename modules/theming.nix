@@ -12,14 +12,14 @@ in {
 
     home-manager.users."${vars.master.name}" = {
       stylix.enable = true;
-      #stylix.image = vars.theme.wallpaper;
+      stylix.image = vars.theme.wallpaper;
 
       stylix.targets.hyprland.enable = false;
       stylix.targets.neovim.enable = false;
       stylix.targets.emacs.enable = false;
     };
 
-    #stylix.image = vars.theme.wallpaper;
+    stylix.image = vars.theme.wallpaper;
     
     stylix.polarity = vars.theme.polarity;
     stylix.base16Scheme = lib.mkIf (vars.theme.colorScheme != null) vars.theme.colorScheme;

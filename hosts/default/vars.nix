@@ -14,6 +14,7 @@ in rec {
   };
 
   theme = {
+    wallpaper = ../../gen/temp_wallpaper.png;
     polarity = "dark";
     colorScheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
   };
