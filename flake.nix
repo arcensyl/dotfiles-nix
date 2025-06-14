@@ -3,7 +3,7 @@
 
   inputs = {
     # This configuration uses the unstable channel for Nix packages.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Home Manager allows me to configure a user's environment.
     home-manager = {
