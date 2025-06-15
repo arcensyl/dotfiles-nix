@@ -20,10 +20,26 @@ in {
       example = [ pkgs.superTuxKart ];
       description = "A list of standalone games to install.";
     };
+
+    steam = {
+      disable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "Whether to disable Steam, the game storefront and launcher";
+      };
+
+      keybindCommand = lib.mkOption {
+        type = lib.types.str;
+        default = "steam";
+        example = "steam -bigpicture";
+        description = "The command used by your WM to launch Steam.";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    programs.steam.enable = true;
+    programs.steam.enable = !cfg.steam.disable;
 
     programs.gamescope = {
       enable = true;
@@ -43,7 +59,7 @@ in {
       programs.mangohud.enable = true;
 
       wayland.windowManager.hyprland.settings = lib.mkIf config.de.hypr.enable {
-        bind = [ "CTRL ALT, S, exec, steam" ];
+        bind = [ "CTRL ALT, S, exec, ${cfg.steam.keybindCommand}" ];
       };
     };
   };
