@@ -8,6 +8,10 @@ in {
     lib.mkEnableOption "the suite for various command-line utilities";
 
   config = lib.mkIf cfg.enable {
+    environment.sessionVariables = {
+      PATH = [ "${vars.master.flakeDir}/scripts" ];
+    };
+    
     home-manager.users."${vars.master.name}" = {
 	  home.packages = with pkgs; [
 	    wl-clipboard
