@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# TODO: Allow qualified package names.
+
+if [[ -z "$1" ]]; then
+    echo "Error: Program not specified!"
+    exit 1
+fi
+
+# Pops the package name off the argument list.
+package="$1"
+shift
+
+# Run the package, which is assumed to be an output of the 'nixpkgs' flake.
+# All remaining arguments are passed to this new program.
+nix run "nixpkgs#$package" -- $@
