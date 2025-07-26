@@ -32,6 +32,9 @@
       url = "github:Wraient/curd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Kaokao is an emoji/kaomoji picked based on Rofi.
+    kaokao.url = "github:zoe-bat/kaokao";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
