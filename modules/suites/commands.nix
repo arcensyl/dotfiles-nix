@@ -31,6 +31,7 @@ in {
 	    ls = "eza --oneline";
 	    ll = "eza --oneline --long";
 	    cd = "z";
+        "with" = "nix-shell --command $SHELL -p";
 	  };
     };
 
