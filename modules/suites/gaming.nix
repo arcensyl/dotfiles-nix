@@ -41,6 +41,8 @@ in {
   config = lib.mkIf cfg.enable {
     programs.steam.enable = !cfg.steam.disable;
 
+    hardware.xone.enable = true;
+
     programs.gamescope = {
       enable = true;
 
