@@ -51,5 +51,7 @@ in {
         name = vars.fonts.emoji.name;
       };
     };
+
+    environment.systemPackages = vars.fonts.extras;
   };
 }
