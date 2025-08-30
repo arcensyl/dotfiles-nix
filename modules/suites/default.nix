@@ -12,5 +12,6 @@
     ./vr.nix
 	./ai.nix
     ./containerization.nix
+    ./virt.nix
   ];
 }
