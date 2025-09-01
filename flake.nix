@@ -11,6 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # This flake provides all of my custom packages.
+    my-packages= {
+      url = "path:./packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+      
     # Stylix is a Nix module to automate theming your system.
     stylix.url = "github:danth/stylix";
 
@@ -61,6 +67,7 @@
           ./modules
 
           # Inline modules:
+          { nixpkgs.overlays = [ inputs.my-packages.overlays.default ]; }
           { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
 
           # Host-specific files:

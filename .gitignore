@@ -1,5 +1,6 @@
 gen/
 flake.lock
 flake.lock.old
+packages/flake.lock
 hosts/*
 !hosts/default/
