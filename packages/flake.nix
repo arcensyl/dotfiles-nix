@@ -14,6 +14,8 @@
     in {
       # Packages go here.
       mypkgs-test = pkgs.callPackage ./mypkgs-test/package.nix {};
+
+      rider2emacs = pkgs.callPackage ./rider2emacs/package.nix {};
     });
 
     # This flake exposes an overlay over Nixpkgs.
